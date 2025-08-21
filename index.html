@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>document</title>
+   <link rel="stylesheet" href="./stylee.css">
+</head>
+
+<body>
+   <h1>Products</h1>
+   <button class="add-btn" onclick="addProduct()">Add Product</button>
+
+   <div id="products">
+   </div>
+
+   <script>
+      let products = [
+         { id: 1, name: 'Burger', price: 10.99, image: './RASM .png' },
+         { id: 2, name: 'Pizza', price: 15.99, image: './RASM .png' },
+         { id: 3, name: 'Tacos', price: 8.99, image: './RASM .png' },
+         { id: 4, name: 'Fries', price: 4.99, image: './RASM .png' },
+         { id: 5, name: 'Salad', price: 7.99, image: './RASM .png' }
+      ];
+
+      function showProducts() {
+         let html = '';
+         products.forEach(product => {
+            html += `
+                    <div class="card">
+                         <img src="${product.image}" alt="${product.name}" style="width:220px; height:250px; object-fit:cover; border-radius:8px;"/>
+                        <div class="title">${product.name}</div>
+                        <div class="price">$${product.price}</div>
+                        <button class="edit-btn" onclick="editProduct(${product.id})">Edit</button>
+                        <button class="delete-btn" onclick="deleteProduct(${product.id})">Delete</button>
+                    </div>
+                `;
+         });
+         document.getElementById('products').innerHTML = html;
+      }
+
+      function addProduct() {
+         let name = prompt('Product name:');
+         let price = prompt('Price:');
+         if (name && price) {
+            let newId = Math.max(...products.map(p => p.id)) + 1;
+            products.push({ id: newId, name: name, price: parseFloat(price) });
+            showProducts();
+         }
+      }
+
+      function editProduct(id) {
+         let product = products.find(p => p.id === id);
+         let newName = input('New name:', product.name);
+         let newPrice = input('New price:', product.price);
+         let newImage = input('New image URL:', product.image);
+         if (newName && newPrice) {
+            product.name = newName;
+            product.price = parseFloat(newPrice);
+            showProducts();
+         }
+      }
+
+      function deleteProduct(id) {
+         if (confirm('Delete this product?')) {
+            products = products.filter(p => p.id !== id);
+            showProducts();
+         }
+      }
+
+      showProducts();
+   </script>
+
+</body>
+
+</html>
