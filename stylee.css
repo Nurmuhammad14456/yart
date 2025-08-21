@@ -36,12 +36,14 @@ button {
   background: #4caf50;
   color: white;
   border: none;
+  border-radius: 10px;
 }
 
 .delete-btn {
   background: #f44336;
   color: white;
   border: none;
+  border-radius: 10px;
 }
 
 .add-btn {
@@ -50,4 +52,5 @@ button {
   border: none;
   padding: 10px 15px;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
